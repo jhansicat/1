@@ -5,7 +5,7 @@ import Coverage from './components/Coverage';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div style={{ minHeight: '100vh', background: '#f8f9fa' }}>
       <Header />
       <main>
         <DeliveryForm />

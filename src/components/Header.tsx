@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Menu, X, Truck } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,30 +11,81 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50">
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center space-x-3"
-          >
-            <div className="bg-green-600 p-2 rounded-lg">
-              <Truck className="h-6 w-6 text-white" />
+    <header style={{
+      background: 'white',
+      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+      position: 'sticky',
+      top: '0',
+      zIndex: '50'
+    }}>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '0 20px'
+      }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: '64px'
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px'
+          }}>
+            <div style={{
+              background: '#25D366',
+              padding: '8px',
+              borderRadius: '8px'
+            }}>
+              <span style={{
+                fontSize: '1.5rem',
+                color: 'white'
+              }}>
+                🚚
+              </span>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-800">NXT Delivery</h1>
-              <p className="text-xs text-gray-600">Fast. Reliable. Secure.</p>
+              <h1 style={{
+                fontSize: '1.2rem',
+                fontWeight: 'bold',
+                color: '#333',
+                margin: '0'
+              }}>
+                NXT Delivery
+              </h1>
+              <p style={{
+                fontSize: '0.7rem',
+                color: '#666',
+                margin: '0'
+              }}>
+                Fast. Reliable. Secure.
+              </p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav style={{
+            display: window.innerWidth <= 768 ? 'none' : 'flex',
+            gap: '30px'
+          }}>
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-green-600 font-medium transition-colors duration-200"
+                style={{
+                  color: '#555',
+                  fontWeight: '500',
+                  textDecoration: 'none',
+                  transition: 'color 0.3s'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.color = '#25D366';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.color = '#555';
+                }}
               >
                 {item.name}
               </a>
@@ -45,35 +94,55 @@ const Header: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            style={{
+              display: window.innerWidth <= 768 ? 'block' : 'none',
+              background: 'none',
+              border: 'none',
+              padding: '8px',
+              cursor: 'pointer'
+            }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6 text-gray-700" />
+              <span style={{ fontSize: '1.5rem' }}>✕</span>
             ) : (
-              <Menu className="h-6 w-6 text-gray-700" />
+              <span style={{ fontSize: '1.5rem' }}>☰</span>
             )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <motion.nav
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="md:hidden py-4 border-t"
-          >
+          <nav style={{
+            display: window.innerWidth <= 768 ? 'block' : 'none',
+            paddingBottom: '15px',
+            borderTop: '1px solid #eee',
+            paddingTop: '15px'
+          }}>
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="block py-2 text-gray-700 hover:text-green-600 font-medium transition-colors duration-200"
+                style={{
+                  display: 'block',
+                  padding: '8px 0',
+                  color: '#555',
+                  fontWeight: '500',
+                  textDecoration: 'none',
+                  transition: 'color 0.3s'
+                }}
                 onClick={() => setIsMenuOpen(false)}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.color = '#25D366';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.color = '#555';
+                }}
               >
                 {item.name}
               </a>
             ))}
-          </motion.nav>
+          </nav>
         )}
       </div>
     </header>

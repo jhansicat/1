@@ -1,15 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { MapPin, Clock, Truck, IndianRupee } from 'lucide-react';
-import CountUp from 'react-countup';
 
 const Coverage: React.FC = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
   const coverageAreas = [
     'Hitech City', 'Gachibowli', 'Madhapur', 'Kondapur', 'Jubilee Hills',
     'Banjara Hills', 'Secunderabad', 'Begumpet', 'Ameerpet', 'Kukatpally',
@@ -21,189 +12,353 @@ const Coverage: React.FC = () => {
     {
       title: 'Local Delivery',
       distance: 'Within 5 km',
-      price: 50,
+      price: '₹50',
       features: ['Same day delivery', 'Real-time tracking', 'SMS updates']
     },
     {
       title: 'City Wide',
-      distance: '5-15 km',
-      price: 80,
+      distance: '5-15 km', 
+      price: '₹80',
       features: ['Express delivery', 'Real-time tracking', 'Call & SMS updates', 'Insurance coverage']
     },
     {
       title: 'Extended Areas',
       distance: '15-30 km',
-      price: 120,
+      price: '₹120', 
       features: ['Next day delivery', 'Premium tracking', 'Call & SMS updates', 'Full insurance', 'Priority support']
     }
   ];
 
   const stats = [
-    { number: 500, suffix: '+', label: 'Deliveries Completed' },
-    { number: 50, suffix: '+', label: 'Areas Covered' },
-    { number: 99, suffix: '%', label: 'On-Time Delivery' },
-    { number: 24, suffix: '/7', label: 'Service Available' }
+    { number: '500+', label: 'Deliveries Completed' },
+    { number: '50+', label: 'Areas Covered' },
+    { number: '99%', label: 'On-Time Delivery' },
+    { number: '24/7', label: 'Service Available' }
   ];
 
   return (
-    <section id="coverage" className="section bg-gray-50">
-      <div className="container-custom">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Coverage Areas & Pricing</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We serve major areas across Hyderabad with transparent pricing and reliable service.
+    <div style={{
+      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+      background: '#f8f9fa',
+      padding: '40px 20px'
+    }}>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto'
+      }}>
+        {/* Header */}
+        <div style={{
+          textAlign: 'center',
+          marginBottom: '40px'
+        }}>
+          <h2 style={{
+            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+            fontWeight: 'bold',
+            color: '#333',
+            marginBottom: '10px'
+          }}>
+            Coverage Areas & Pricing
+          </h2>
+          <p style={{
+            fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+            color: '#666',
+            maxWidth: '600px',
+            margin: '0 auto'
+          }}>
+            We serve major areas across Hyderabad with transparent pricing in Indian Rupees.
           </p>
-        </motion.div>
+        </div>
 
         {/* Pricing Section */}
-        <div className="mb-16">
-          <motion.h3
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-3xl font-bold text-center text-gray-800 mb-12"
-          >
+        <div style={{ marginBottom: '40px' }}>
+          <h3 style={{
+            fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            color: '#333',
+            marginBottom: '30px'
+          }}>
             Delivery Pricing
-          </motion.h3>
+          </h3>
           
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : 'repeat(3, 1fr)',
+            gap: '20px',
+            marginBottom: '30px'
+          }}>
             {pricingTiers.map((tier, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                className={`bg-white rounded-2xl shadow-lg p-8 relative ${
-                  index === 1 ? 'ring-2 ring-green-500 scale-105' : ''
-                }`}
+                style={{
+                  background: 'white',
+                  borderRadius: '12px',
+                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+                  padding: '30px 20px',
+                  textAlign: 'center',
+                  border: index === 1 ? '2px solid #25D366' : 'none',
+                  transform: index === 1 ? 'scale(1.05)' : 'scale(1)',
+                  position: 'relative'
+                }}
               >
                 {index === 1 && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-green-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                      Most Popular
-                    </span>
+                  <div style={{
+                    position: 'absolute',
+                    top: '-15px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    background: '#25D366',
+                    color: 'white',
+                    padding: '5px 15px',
+                    borderRadius: '20px',
+                    fontSize: '0.8rem',
+                    fontWeight: 'bold'
+                  }}>
+                    Most Popular
                   </div>
                 )}
                 
-                <div className="text-center">
-                  <h4 className="text-xl font-bold text-gray-800 mb-2">{tier.title}</h4>
-                  <p className="text-gray-600 mb-4">{tier.distance}</p>
-                  
-                  <div className="flex items-center justify-center mb-6">
-                    <IndianRupee className="h-8 w-8 text-green-600" />
-                    <span className="text-4xl font-bold text-gray-800">{tier.price}</span>
-                    <span className="text-gray-600 ml-2">starting</span>
-                  </div>
-                  
-                  <ul className="space-y-3 mb-8">
-                    {tier.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-gray-700">
-                        <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <button className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
-                    Choose Plan
-                  </button>
+                <h4 style={{
+                  fontSize: '1.2rem',
+                  fontWeight: 'bold',
+                  color: '#333',
+                  marginBottom: '10px'
+                }}>
+                  {tier.title}
+                </h4>
+                <p style={{
+                  color: '#666',
+                  marginBottom: '15px'
+                }}>
+                  {tier.distance}
+                </p>
+                
+                <div style={{
+                  fontSize: '2.5rem',
+                  fontWeight: 'bold',
+                  color: '#25D366',
+                  marginBottom: '5px'
+                }}>
+                  {tier.price}
                 </div>
-              </motion.div>
+                <p style={{
+                  color: '#666',
+                  marginBottom: '20px',
+                  fontSize: '0.9rem'
+                }}>
+                  starting price
+                </p>
+                
+                <div style={{ marginBottom: '25px' }}>
+                  {tier.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      marginBottom: '8px',
+                      color: '#555'
+                    }}>
+                      <div style={{
+                        width: '8px',
+                        height: '8px',
+                        background: '#25D366',
+                        borderRadius: '50%',
+                        marginRight: '10px'
+                      }}></div>
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+                
+                <button style={{
+                  width: '100%',
+                  background: '#25D366',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  padding: '12px',
+                  border: 'none',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  fontSize: '1rem',
+                  transition: 'background-color 0.3s'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = '#20b85c';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = '#25D366';
+                }}>
+                  Choose Plan
+                </button>
+              </div>
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center"
-          >
-            <p className="text-blue-800">
-              <strong>Special Offers:</strong> Bulk deliveries (5+ items) get 15% discount. 
-              Corporate accounts enjoy priority service and custom pricing.
-            </p>
-          </motion.div>
+          <div style={{
+            background: '#e3f2fd',
+            border: '1px solid #2196f3',
+            borderRadius: '8px',
+            padding: '15px',
+            textAlign: 'center',
+            color: '#1976d2'
+          }}>
+            <strong>Special Offers:</strong> Bulk deliveries (5+ items) get 15% discount. 
+            Corporate accounts enjoy priority service and custom pricing.
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">Areas We Serve</h3>
-            <div className="grid grid-cols-2 gap-3">
+        {/* Coverage Areas and Map */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : '1fr 1fr',
+          gap: '30px',
+          alignItems: 'center',
+          marginBottom: '40px'
+        }}>
+          <div>
+            <h3 style={{
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
+              color: '#333',
+              marginBottom: '20px'
+            }}>
+              Areas We Serve
+            </h3>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '10px'
+            }}>
               {coverageAreas.map((area, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="flex items-center bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    background: 'white',
+                    padding: '10px',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+                    transition: 'box-shadow 0.3s'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.15)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+                  }}
                 >
-                  <MapPin className="h-4 w-4 text-green-600 mr-2 flex-shrink-0" />
-                  <span className="text-gray-700 text-sm">{area}</span>
-                </motion.div>
+                  <div style={{
+                    width: '8px',
+                    height: '8px',
+                    background: '#25D366',
+                    borderRadius: '50%',
+                    marginRight: '8px'
+                  }}></div>
+                  <span style={{
+                    color: '#555',
+                    fontSize: '0.9rem'
+                  }}>
+                    {area}
+                  </span>
+                </div>
               ))}
             </div>
-            <div className="mt-6 p-4 bg-green-50 rounded-lg">
-              <p className="text-green-800 text-sm">
+            <div style={{
+              marginTop: '20px',
+              padding: '15px',
+              background: '#e8f5e8',
+              borderRadius: '8px'
+            }}>
+              <p style={{
+                color: '#2e7d32',
+                fontSize: '0.9rem'
+              }}>
                 <strong>Don't see your area?</strong> Contact us! We're constantly expanding our coverage and may already serve your location.
               </p>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative"
-          >
+          <div style={{ position: 'relative' }}>
             <img 
               src="https://images.pexels.com/photos/7706409/pexels-photo-7706409.jpeg" 
               alt="Delivery Coverage Map" 
-              className="rounded-2xl shadow-lg w-full h-96 object-cover"
+              style={{
+                borderRadius: '12px',
+                boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                width: '100%',
+                height: '300px',
+                objectFit: 'cover'
+              }}
             />
-            <div className="absolute inset-0 bg-green-600 bg-opacity-20 rounded-2xl flex items-center justify-center">
-              <div className="text-center text-white">
-                <Truck className="h-16 w-16 mx-auto mb-4" />
-                <h4 className="text-2xl font-bold mb-2">Hyderabad Wide</h4>
-                <p className="text-lg">Fast & Reliable Delivery</p>
+            <div style={{
+              position: 'absolute',
+              top: '0',
+              left: '0',
+              right: '0',
+              bottom: '0',
+              background: 'rgba(37, 211, 102, 0.2)',
+              borderRadius: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <div style={{
+                textAlign: 'center',
+                color: 'white'
+              }}>
+                <div style={{
+                  fontSize: '3rem',
+                  marginBottom: '10px'
+                }}>
+                  🚚
+                </div>
+                <h4 style={{
+                  fontSize: '1.5rem',
+                  fontWeight: 'bold',
+                  marginBottom: '5px'
+                }}>
+                  Hyderabad Wide
+                </h4>
+                <p style={{ fontSize: '1rem' }}>
+                  Fast & Reliable Delivery
+                </p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {/* Stats */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: window.innerWidth <= 768 ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
+          gap: '20px'
+        }}>
           {stats.map((stat, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              className="text-center"
+              style={{
+                textAlign: 'center'
+              }}
             >
-              <div className="text-4xl font-bold text-green-600 mb-2">
-                {inView && (
-                  <CountUp
-                    end={stat.number}
-                    duration={2}
-                    suffix={stat.suffix}
-                  />
-                )}
+              <div style={{
+                fontSize: '2.5rem',
+                fontWeight: 'bold',
+                color: '#25D366',
+                marginBottom: '5px'
+              }}>
+                {stat.number}
               </div>
-              <p className="text-gray-600 font-medium">{stat.label}</p>
-            </motion.div>
+              <p style={{
+                color: '#666',
+                fontWeight: '500'
+              }}>
+                {stat.label}
+              </p>
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
